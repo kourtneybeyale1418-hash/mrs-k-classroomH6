@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mrs. K's 1-Year-Old Classroom</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #FFD93D 0%, #6BCB77 100%);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        /* Page Container */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #FFD93D 0%, #6FDCE3 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            animation: bounce 1s ease-in-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            background: #FF6B9D;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #FF4A7D;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,107,157,0.4);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            background: #FFF8E7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #FF6B9D;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        /* About Section */
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .about-intro {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, #FFD93D, #FF6B9D);
+            border-radius: 20px;
+            padding: 1rem;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .about-text {
+            background: #E3F2FD;
+            padding: 2rem;
+            border-radius: 20px;
+            font-size: 1.1rem;
+        }
+
+        .bio-section, .philosophy-section {
+            background: #F3E5F5;
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+        }
+
+        .philosophy-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .philosophy-list li {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            background: white;
+            border-radius: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* Schedule Section */
+        .schedule-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .schedule-container h1 {
+            text-align: center;
+            color: #FF6B9D;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+
+        .schedule-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+
+        .schedule-table th {
+            background: linear-gradient(135deg, #FFD93D, #6BCB77);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-size: 1.2rem;
+        }
+
+        .schedule-table td {
+            background: white;
+            padding: 1rem;
+            border-bottom: 2px solid #E8F5E9;
+        }
+
+        .schedule-table tr {
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .schedule-icon {
+            font-size: 1.5rem;
+            margin-right: 0.5rem;
+        }
+
+        /* Resources Section */
+        .resources-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .resource-card {
+            background: #FFF9C4;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .resource-card h2 {
+            color: #FF6B9D;
+            margin-bottom: 1rem;
+        }
+
+        .resource-card ul {
+            list-style: none;
+        }
+
+        .resource-card li {
+            padding: 0.5rem 0;
+            font-size: 1.05rem;
+        }
+
+        .contact-icon {
+            margin-right: 0.5rem;
+        }
+
+        /* Multimedia Section */
+        .multimedia-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .multimedia-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 1.3rem;
+            color: #333;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-info {
+            padding: 1.5rem;
+        }
+
+        .video-info h3 {
+            color: #FF6B9D;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-intro {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#" onclick="showPage('about')">About Mrs. K</a></li>
+            <li><a href="#" onclick="showPage('schedule')">Schedule</a></li>
+            <li><a href="#" onclick="showPage('resources')">Parent Resources</a></li>
+            <li><a href="#" onclick="showPage('multimedia')">Multimedia</a></li>
+        </ul>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <section class="hero">
+            <h1>Welcome to Mrs. K's 1-Year-Old Classroom! 🎈</h1>
+            <p>A safe, nurturing, and fun environment where your little ones can learn, explore, and grow.</p>
+            <button class="btn" onclick="showPage('about')">Meet Mrs. K</button>
+        </section>
+
+        <section class="features">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🧸</div>
+                    <h3>Play & Learn</h3>
+                    <p>Safe, engaging play-based learning activities designed for curious toddlers</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Whole-Child Growth</h3>
+                    <p>Academic, social-emotional, and physical development in every activity</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👪</div>
+                    <h3>Family Involvement</h3>
+                    <p>Strong parent communication and support every step of the way</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+        <div class="about-container">
+            <div class="about-intro">
+                <div class="about-image">👩‍🏫</div>
+                <div class="about-text">
+                    <p>"We strive to meet the needs of the whole child by providing a culturally sensitive, safe, and healthy environment. Every child develops academically, cognitively, socially-emotionally, and physically. Families and staff feel inspired to reach their fullest potential."</p>
+                </div>
+            </div>
+
+            <div class="bio-section">
+                <h2 style="color: #FF6B9D; margin-bottom: 1rem;">Meet Mrs. K</h2>
+                <p><strong>Name:</strong> Mrs. K</p>
+                <p><strong>Experience:</strong> Years of education experience working with young learners</p>
+                <p><strong>Fun Fact:</strong> "I love reading storybooks and doing crafts with toddlers!"</p>
+            </div>
+
+            <div class="philosophy-section">
+                <h2 style="color: #FF6B9D; margin-bottom: 1rem;">Our Classroom Philosophy</h2>
+                <ul class="philosophy-list">
+                    <li>🏫 <strong>Safe, Engaging Classroom:</strong> Every corner is designed with your child's safety and curiosity in mind</li>
+                    <li>🤝 <strong>Respectful, Inclusive Community:</strong> We celebrate diversity and teach kindness every day</li>
+                    <li>🎨 <strong>Learning Through Play:</strong> Exploration and play are the foundation of early childhood development</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCHEDULE PAGE -->
+    <div id="schedule" class="page">
+        <div class="schedule-container">
+            <h1>Daily Classroom Schedule 📅</h1>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Activity</th>
+                        <th>Icon</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>7:00 AM</td><td>Drop Off</td><td class="schedule-icon">🚪</td></tr>
+                    <tr><td>8:00 AM</td><td>Breakfast</td><td class="schedule-icon">🍽️</td></tr>
+                    <tr><td>8:30 AM</td><td>Free Play</td><td class="schedule-icon">🧸</td></tr>
+                    <tr><td>9:00-9:30 AM</td><td>Playground</td><td class="schedule-icon">🛝</td></tr>
+                    <tr><td>10:00-10:40 AM</td><td>Free Play</td><td class="schedule-icon">🎨</td></tr>
+                    <tr><td>11:00 AM</td><td>Lunch</td><td class="schedule-icon">🥪</td></tr>
+                    <tr><td>12:00 PM</td><td>Nap Time</td><td class="schedule-icon">💤</td></tr>
+                    <tr><td>2:00 PM</td><td>Wake Up / Snack</td><td class="schedule-icon">🍎</td></tr>
+                    <tr><td>3:00 PM</td><td>Art Activity</td><td class="schedule-icon">✂️</td></tr>
+                    <tr><td>4:00 PM</td><td>Music</td><td class="schedule-icon">🎵</td></tr>
+                    <tr><td>5:00 PM</td><td>Free Play / Snack / Calming Time</td><td class="schedule-icon">🧩</td></tr>
+                    <tr><td>6:00 PM</td><td>Pickup</td><td class="schedule-icon">👋</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- PARENT RESOURCES PAGE -->
+    <div id="resources" class="page">
+        <div class="resources-container">
+            <h1 style="text-align: center; color: #FF6B9D; margin-bottom: 3rem; font-size: 2.5rem;">Parent Resources 📚</h1>
+            
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h2>Contact Information</h2>
+                    <ul>
+                        <li><span class="contact-icon">📧</span> <strong>Email:</strong> krbeyale26@my.sanjuancollege.edu</li>
+                        <li><span class="contact-icon">📞</span> <strong>Phone:</strong> 555-555-5555</li>
+                        <li><span class="contact-icon">🕐</span> <strong>Hours:</strong> 7:00 AM - 6:00 PM</li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h2>Parent Tips</h2>
+                    <ul>
+                        <li>💤 Maintain consistent nap & meal schedules</li>
+                        <li>🎨 Encourage simple art or music at home</li>
+                        <li>🧸 Engage in safe, guided play</li>
+                        <li>📖 Read together daily</li>
+                        <li>🗣️ Talk and sing with your child</li>
+                    </ul>
+                </div>
+
+                <div class="resource-card">
+                    <h2>Helpful Resources</h2>
+                    <ul>
+                        <li>📄 Monthly Calendar</li>
+                        <li>📋 Classroom Policies</li>
+                        <li>✅ Permission Forms</li>
+                        <li>🌐 Toddler Activity Ideas</li>
+                        <li>🏥 Health & Safety Guides</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MULTIMEDIA PAGE -->
+    <div id="multimedia" class="page">
+        <div class="multimedia-container">
+            <h1 style="text-align: center; color: #FF6B9D; margin-bottom: 2rem; font-size: 2.5rem;">Home Learning Resources 🎥</h1>
+            <p class="multimedia-intro">Explore fun songs, stories, and activities you can do at home with your child!</p>
+
+            <div class="video-grid">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/Oq61TxejZ5g" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Sing Along Time 🎤</h3>
+                        <p>Fun, engaging songs perfect for toddlers to sing and dance along with!</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/UEER3Qq19SY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>5-Minute Craft Activity ✂️</h3>
+                        <p>Quick and easy craft projects you can do together at home</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/hMg80RmpmJc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Storytime 📖</h3>
+                        <p>Engaging stories that capture your toddler's imagination</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/p430dZvd5aI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Teach Through Play 🎯</h3>
+                        <p>Learn how play helps your child develop important skills</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe src="https://www.youtube.com/embed/-mk4MiirzcI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Toddler-Friendly Snacks 🍎</h3>
+                        <p>Healthy, safe, and delicious snack ideas for little ones</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
